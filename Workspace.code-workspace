@@ -1,0 +1,21 @@
+{
+	"folders": [	
+		{
+			"name": "src",
+			"path": "./src",
+		},
+		{
+			"name": "resources",
+			"path": "./resources",
+		},
+
+		{
+			"name": "builds",
+			"path": "./builds",
+		},
+		{
+			"name": "root",
+			"path": ".",
+		}
+	]
+}
