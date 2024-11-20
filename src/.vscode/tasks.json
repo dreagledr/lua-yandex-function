@@ -18,6 +18,22 @@
             },
             // Use the standard MS compiler pattern to detect errors, warnings and infos
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "../resources/deploy.bat",
+            "args": [
+                // Ask msbuild to generate full paths for file names.
+                //"../builds/func.zip ../resources/func.sh ../resources/luajit21 main.lua /lib"
+            ],
+            "group": "build",
+            "presentation": {
+                // Reveal the output only if unrecognized errors occur.
+                "reveal": "silent"
+            },
+            // Use the standard MS compiler pattern to detect errors, warnings and infos
+            "problemMatcher": "$msCompile"
         }
     ]
 }
