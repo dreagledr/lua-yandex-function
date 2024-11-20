@@ -2,25 +2,25 @@
 Lua Yandex Cloud Function Template
 
 ## Требования
-Для разработки на Windows
-- [Visual Studio Code](https://code.visualstudio.com/download)
-- Lua. Можно в составе [LÖVE 11.4](https://love2d.org/) или [LuaForWindows](https://github.com/rjpcomputing/luaforwindows)
-- WSL [WSL install](https://learn.microsoft.com/en-us/windows/wsl/install)
-- В WSL собрать [LuaJIT](https://luajit.org/install.html) (опционально). Есть собранная версия в repo
-- В WSL установить zip '''$ sudo apt-get install zip'''
-- [Yandex Cloud (CLI) ](https://yandex.cloud/ru/docs/cli/quickstart)
+Для разработки на Windows  
+- [Visual Studio Code](https://code.visualstudio.com/download)  
+- Lua. Можно в составе [LÖVE 11.4](https://love2d.org/) или [LuaForWindows](https://github.com/rjpcomputing/luaforwindows)  
+- WSL [WSL install](https://learn.microsoft.com/en-us/windows/wsl/install)  
+- В WSL собрать [LuaJIT](https://luajit.org/install.html) (опционально). Есть собранная версия в repo  
+- В WSL установить zip '''$ sudo apt-get install zip'''  
+- [Yandex Cloud (CLI) ](https://yandex.cloud/ru/docs/cli/quickstart)  
 
 ## Примечания
-1 - Использовать шаблон для создания функции
-2 - Открыть `Workspace.code-workspace` и установить рекомендованные расширения
-3 - Настроить стили `Root/.editorconfig`
-4 - Разместить нужную лицензию `Root/LICENSE`
+1 - Использовать шаблон для создания функции  
+2 - Открыть `Workspace.code-workspace` и установить рекомендованные расширения  
+3 - Настроить стили `Root/.editorconfig`  
+4 - Разместить нужную лицензию `Root/LICENSE`  
 
 ## WSL
 Хост функции в облаке yandex на linux. Нужна WSL чтобы задать права файлам интерпретатора на исполнение.  
 Также нужно собрать/взять готовые бинарники lua для linux. LuaJIT только из исходников, просто lua есть уже собранные.  
 Функция загружается архивом со всеми нужными файлами.  
-Приходится создавать его из под linux, так как на Windows теряются данные файловой системы о правах на исполнение. Иначе будет ошибка доступа в облаке
+Приходится создавать архив из под linux, так как на Windows теряются данные файловой системы о правах на исполнение. Иначе будет ошибка доступа в облаке
 
 Прописываем права из под wsl
 ```
