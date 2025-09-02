@@ -54,5 +54,4 @@ jobs:
                   runtime: "bash-2204"
                   memory: "128Mb"
                   entrypoint: "handler.sh"
-                  include: |
-                      ./function
+                  source-root: ./function
