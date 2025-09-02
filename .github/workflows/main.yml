@@ -39,7 +39,7 @@ jobs:
           chmod +x function/main.lua
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: luajit-function
           path: function/
