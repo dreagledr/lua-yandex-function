@@ -65,6 +65,14 @@ function base64.makeencoder( s62, s63, spad )
 	return encoder
 end
 
+function base64.makeurlencoder()
+	return base64.makeencoder('-', '_', '=')
+end
+
+function base64.makeurldecoder()
+	return base64.makedecoder('-', '_', '=')
+end
+
 function base64.makedecoder( s62, s63, spad )
 	local decoder = {}
 	for b64code, charcode in pairs( base64.makeencoder( s62, s63, spad )) do
