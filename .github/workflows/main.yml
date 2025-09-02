@@ -1,0 +1,45 @@
+name: Build LuaJIT for YC Functions
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository to a specific folder
+        uses: actions/checkout@v5
+        with:
+          path: repo
+      
+      - name: Checkout LuaJIT
+        run: |
+          git clone https://github.com/LuaJIT/LuaJIT.git
+          cd LuaJIT
+          git checkout v2.1
+
+      - name: Build LuaJIT
+        run: |
+          cd LuaJIT
+          make
+
+      - name: Create deployment package
+        run: |
+          mkdir -p function/lib
+          cd LuaJIT/src
+          cp luajit ../../function/
+          cd ../../repo/src
+          cp main.lua ../../function/
+          cp lib/* ../../function/lib
+          echo './luajit main.lua' > ../../function/handler.sh
+
+      - name: Make executable
+        run: |
+          chmod +x function/luajit
+          chmod +x function/main.lua
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: luajit-function
+          path: function/
