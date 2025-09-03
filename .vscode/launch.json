@@ -8,11 +8,8 @@
 			"program": {
 				"command": "lua"
 			},
-			"args": [
-				"debug.lua",
-				"debug",
-				"< ../resources/request.json"
-			],
-		},
+			"args": ["debug.lua", "debug", "< ../resources/request.json"],
+			"cwd": "${workspaceFolder}/src"
+		}
 	]
 }
