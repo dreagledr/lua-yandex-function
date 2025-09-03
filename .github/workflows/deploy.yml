@@ -1,57 +1,57 @@
-name: Build and deploy lua YC function
+name: Build and deploy Lua YC function
 
 on:
-    workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
-    build:
-        runs-on: ubuntu-22.04
-        steps:
-            - name: Checkout repository to a specific folder
-              uses: actions/checkout@v5
-              with:
-                  path: repo
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository to a specific folder
+        uses: actions/checkout@v5
+        with:
+          path: repo
 
-            - name: Checkout LuaJIT
-              run: |
-                  git clone https://github.com/LuaJIT/LuaJIT.git
-                  cd LuaJIT
-                  git checkout v2.1
+      - name: Checkout LuaJIT
+        run: |
+          git clone https://github.com/LuaJIT/LuaJIT.git
+          cd LuaJIT
+          git checkout v2.1
 
-            - name: Build LuaJIT
-              run: |
-                  cd LuaJIT
-                  make
+      - name: Build LuaJIT
+        run: |
+          cd LuaJIT
+          make
 
-            - name: Create deployment package
-              run: |
-                  mkdir -p function/lib
-                  cd LuaJIT/src
-                  cp luajit ../../function/
-                  cd ../../repo/src
-                  cp main.lua ../../function/
-                  cp lib/* ../../function/lib
-                  echo './luajit main.lua' > ../../function/handler.sh
+      - name: Create deployment package
+        run: |
+          mkdir -p function/lib
+          cd LuaJIT/src
+          cp luajit ../../function/
+          cd ../../repo/src
+          cp main.lua ../../function/
+          cp lib/* ../../function/lib
+          echo './luajit main.lua' > ../../function/handler.sh
 
-            - name: Make executable
-              run: |
-                  chmod +x function/luajit
-                  chmod +x function/main.lua
+      - name: Make executable
+        run: |
+          chmod +x function/luajit
+          chmod +x function/main.lua
 
-            - name: Upload artifact
-              uses: actions/upload-artifact@v4
-              with:
-                  name: luajit-function
-                  path: function/
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: luajit-function
+          path: function/
 
-            - name: Deploy Function
-              id: sls-func
-              uses: yc-actions/yc-sls-function@v4
-              with:
-                  yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
-                  folder-id: ${{ secrets.YC_FOLDER_ID }}
-                  function-name: "test-function"
-                  runtime: "bash-2204"
-                  memory: "128Mb"
-                  entrypoint: "handler.sh"
-                  source-root: ./function
+      - name: Deploy Function
+        id: sls-func
+        uses: yc-actions/yc-sls-function@v4
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+          folder-id: ${{ secrets.YC_FOLDER_ID }}
+          function-name: "test-function"
+          runtime: "bash-2204"
+          memory: "128Mb"
+          entrypoint: "handler.sh"
+          source-root: ./function

@@ -1,0 +1,44 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile",
+            "windows": {
+                "command": "./build.cmd"
+            },
+            "linux": {
+                "command": "./build.sh"
+            }
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "yc",
+            "args": [
+                "sls",
+                "fn",
+                "version",
+                "create",
+                "--function-name",
+                "test-function",
+                "--source-path",
+                "./dist/function.zip",
+                "--runtime",
+                "bash-2204",
+                "--entrypoint",
+                "handler.sh"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "silent"
+            },
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
