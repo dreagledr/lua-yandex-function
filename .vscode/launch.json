@@ -1,15 +1,15 @@
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"type": "lua-local",
-			"request": "launch",
-			"name": "Debug",
-			"program": {
-				"command": "lua"
-			},
-			"args": ["debug.lua", "debug", "< ../resources/request.json"],
-			"cwd": "${workspaceFolder}/src"
-		}
-	]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lua-local",
+            "request": "launch",
+            "name": "Debug",
+            "program": {
+                "command": "lua"
+            },
+            "args": ["debug.lua", "debug", "< ../request.json"],
+            "cwd": "${workspaceFolder}/src"
+        }
+    ]
 }
